@@ -1,11 +1,10 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { 
-  Bell, User, Menu, Sun, Moon, ChevronDown, X
+  Bell, User, Menu, Sun, Moon, ChevronDown, X, Settings, LogOut
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 

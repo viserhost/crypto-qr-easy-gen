@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Menu, X, Moon, Sun } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
-  const { user, logout } = require("@/contexts/AuthContext")?.useAuth?.() ?? {};
+  const { user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,12 +64,10 @@ const Header: React.FC = () => {
     >
       <div className="container mx-auto py-4 px-4 md:px-6">
         <div className="flex items-center justify-between">
-          {/* Logo */}
           <Link to="/" className="flex items-center">
             <span className="text-xl font-bold text-primary">ClickGain</span>
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-6">
             {navLinks.map((link) => (
               <Link
@@ -81,7 +80,6 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-4">
             {user ? (
               <>
@@ -113,7 +111,6 @@ const Header: React.FC = () => {
             </button>
           </div>
 
-          {/* Mobile Menu Button */}
           <div className="flex items-center space-x-4 md:hidden">
             <button
               onClick={toggleTheme}
@@ -133,7 +130,6 @@ const Header: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`mobile-menu fixed inset-0 top-[72px] bg-background z-40 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'

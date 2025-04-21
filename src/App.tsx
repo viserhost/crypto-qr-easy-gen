@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,7 +17,12 @@ const queryClient = new QueryClient();
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { user } = useAuth();
-  if (!user) return <Navigate to="/" replace />;
+  
+  if (!user) {
+    console.log("No user found, redirecting to home");
+    return <Navigate to="/" replace />;
+  }
+  
   return children;
 }
 
@@ -26,8 +32,8 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <AuthProvider>
-          <BrowserRouter>
+        <BrowserRouter>
+          <AuthProvider>
             <Suspense fallback={<div className="flex justify-center items-center min-h-screen">Loading...</div>}>
               <Routes>
                 <Route path="/" element={<Index />} />
@@ -43,8 +49,8 @@ const App = () => (
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
-          </BrowserRouter>
-        </AuthProvider>
+          </AuthProvider>
+        </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>

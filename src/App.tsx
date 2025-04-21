@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -11,14 +10,13 @@ import { AuthProvider, useAuth } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
 // Lazy loaded pages
-const LoginRegister = lazy(() => import("./pages/LoginRegister"));
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 
 const queryClient = new QueryClient();
 
 function PrivateRoute({ children }: { children: JSX.Element }) {
   const { user } = useAuth();
-  if (!user) return <Navigate to="/login" replace />;
+  if (!user) return <Navigate to="/" replace />;
   return children;
 }
 
@@ -33,7 +31,6 @@ const App = () => (
             <Suspense fallback={<div className="flex justify-center items-center min-h-screen">Loading...</div>}>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/login" element={<LoginRegister />} />
                 <Route
                   path="/dashboard/*"
                   element={

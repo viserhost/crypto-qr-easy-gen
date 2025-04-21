@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Link } from 'react-router-dom';
@@ -91,18 +90,7 @@ const Header: React.FC = () => {
                   Log Out
                 </Button>
               </>
-            ) : (
-              <>
-                <Link to="/login">
-                  <Button variant="outline" size="sm">
-                    Log In
-                  </Button>
-                </Link>
-                <Link to="/login">
-                  <Button size="sm">Sign Up</Button>
-                </Link>
-              </>
-            )}
+            ) : null}
             <button
               onClick={toggleTheme}
               className="p-2 rounded-md hover:bg-muted transition-colors"
@@ -167,18 +155,7 @@ const Header: React.FC = () => {
                   Log Out
                 </Button>
               </>
-            ) : (
-              <>
-                <Link to="/login">
-                  <Button variant="outline" onClick={() => setIsMenuOpen(false)}>
-                    Log In
-                  </Button>
-                </Link>
-                <Link to="/login">
-                  <Button onClick={() => setIsMenuOpen(false)}>Sign Up</Button>
-                </Link>
-              </>
-            )}
+            ) : null}
           </div>
         </div>
       </div>

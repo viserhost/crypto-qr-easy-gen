@@ -8,6 +8,7 @@ import { Suspense, lazy } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 // Lazy loaded pages
 const LoginRegister = lazy(() => import("./pages/LoginRegister"));
@@ -23,30 +24,32 @@ function PrivateRoute({ children }: { children: JSX.Element }) {
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <AuthProvider>
-        <BrowserRouter>
-          <Suspense fallback={<div className="flex justify-center items-center min-h-screen">Loading...</div>}>
-            <Routes>
-              <Route path="/" element={<Index />} />
-              <Route path="/login" element={<LoginRegister />} />
-              <Route
-                path="/dashboard"
-                element={
-                  <PrivateRoute>
-                    <Dashboard />
-                  </PrivateRoute>
-                }
-              />
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </BrowserRouter>
-      </AuthProvider>
-    </TooltipProvider>
+    <ThemeProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <AuthProvider>
+          <BrowserRouter>
+            <Suspense fallback={<div className="flex justify-center items-center min-h-screen">Loading...</div>}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/login" element={<LoginRegister />} />
+                <Route
+                  path="/dashboard/*"
+                  element={
+                    <PrivateRoute>
+                      <Dashboard />
+                    </PrivateRoute>
+                  }
+                />
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </AuthProvider>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 

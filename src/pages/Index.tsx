@@ -8,6 +8,7 @@ import Features from '@/components/sections/Features';
 import Pricing from '@/components/sections/Pricing';
 import Testimonials from '@/components/sections/Testimonials';
 import FAQ from '@/components/sections/FAQ';
+import LatestBlog from '@/components/sections/LatestBlog';
 import Footer from '@/components/layout/Footer';
 
 const Index = () => {
@@ -21,6 +22,7 @@ const Index = () => {
           <Features />
           <Pricing />
           <Testimonials />
+          <LatestBlog />
           <FAQ />
         </main>
         <Footer />

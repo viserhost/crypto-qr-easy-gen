@@ -18,7 +18,7 @@ const blogPosts = [
   {
     id: 2,
     title: 'Understanding the ClickGain Referral System',
-    excerpt: 'Learn how our multi-tiered referral program works and why it's considered one of the most generous in the paid-to-click industry.',
+    excerpt: "Learn how our multi-tiered referral program works and why it's considered one of the most generous in the paid-to-click industry.",
     image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?auto=format&fit=crop&w=800&q=80',
     date: 'April 10, 2025',
     author: 'Mike Chen'

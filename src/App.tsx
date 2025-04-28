@@ -16,6 +16,12 @@ import Register from "./pages/Register";
 // Lazy loaded pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
 
+// Admin pages
+const AdminLayout = lazy(() => import("./components/layout/AdminLayout"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminSettings = lazy(() => import("./pages/admin/AdminSettings"));
+const AdminPlans = lazy(() => import("./pages/admin/AdminPlans"));
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -33,6 +39,14 @@ const App = () => (
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/dashboard/*" element={<Dashboard />} />
+                
+                {/* Admin Routes */}
+                <Route path="/admin" element={<AdminLayout />}>
+                  <Route index element={<AdminDashboard />} />
+                  <Route path="settings" element={<AdminSettings />} />
+                  <Route path="plans" element={<AdminPlans />} />
+                </Route>
+                
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

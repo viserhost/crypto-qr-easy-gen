@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -27,14 +26,12 @@ const AdminLayout: React.FC = () => {
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      {/* Sidebar */}
       <motion.aside
         initial={{ width: isSidebarOpen ? 250 : 80 }}
         animate={{ width: isSidebarOpen ? 250 : 80 }}
         transition={{ duration: 0.3 }}
-        className="bg-card border-r shadow-sm flex flex-col"
+        className="bg-card border-r shadow-sm flex flex-col shrink-0"
       >
-        {/* Logo and brand */}
         <div className={`flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} p-4 border-b`}>
           <div className="flex items-center">
             <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center text-primary-foreground font-bold">
@@ -53,7 +50,6 @@ const AdminLayout: React.FC = () => {
           </Button>
         </div>
 
-        {/* Navigation */}
         <nav className="flex-1 overflow-y-auto p-3">
           <ul className="space-y-2">
             <li>
@@ -89,7 +85,6 @@ const AdminLayout: React.FC = () => {
           </ul>
         </nav>
 
-        {/* Footer */}
         <div className="p-4 border-t">
           <div className={`flex items-center ${!isSidebarOpen && 'justify-center'} mb-4`}>
             <Shield className="h-5 w-5 text-primary" />
@@ -107,15 +102,12 @@ const AdminLayout: React.FC = () => {
         </div>
       </motion.aside>
 
-      {/* Main content */}
       <div className="flex flex-col flex-1 w-full overflow-hidden">
-        {/* Header */}
-        <header className="h-16 px-6 border-b flex items-center">
+        <header className="h-16 px-6 border-b flex items-center sticky top-0 bg-background z-10">
           <h1 className="text-2xl font-semibold">Admin Panel</h1>
         </header>
         
-        {/* Content area */}
-        <main className="flex-1 overflow-y-auto p-6">
+        <main className="flex-1 overflow-y-auto">
           <Outlet />
         </main>
       </div>

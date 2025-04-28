@@ -26,7 +26,6 @@ type NotificationItem = {
   read: boolean;
 };
 
-// Mock notifications
 const mockNotifications: NotificationItem[] = [
   {
     id: '1',
@@ -71,13 +70,11 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   const userMenuRef = useRef<HTMLDivElement>(null);
   const notificationsRef = useRef<HTMLDivElement>(null);
 
-  // Update page title based on location
   useEffect(() => {
     const path = location.pathname;
     setPageTitle(pageNames[path] || 'Dashboard');
   }, [location]);
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
@@ -87,7 +84,6 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close dropdowns when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(event.target as Node)) {
@@ -118,12 +114,12 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
       }`}
     >
       <div className="h-16 px-4 flex items-center justify-between border-b">
-        <div className="flex items-center">
+        <div className="flex items-center gap-2">
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
-            className="mr-2 md:hidden"
+            className="mr-2"
             aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
           >
             {isSidebarOpen ? <X size={18} /> : <Menu size={18} />}
@@ -133,7 +129,6 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         </div>
         
         <div className="flex items-center space-x-2">
-          {/* Theme toggle */}
           <Button 
             variant="ghost" 
             size="icon" 
@@ -143,7 +138,6 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </Button>
           
-          {/* Notifications */}
           <div className="relative" ref={notificationsRef}>
             <Button
               variant="ghost"
@@ -221,7 +215,6 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             </AnimatePresence>
           </div>
           
-          {/* User menu */}
           <div className="relative" ref={userMenuRef}>
             <Button
               variant="ghost"

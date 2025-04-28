@@ -20,15 +20,14 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
       // Only automatically adjust sidebar on window resize, not on initial load
       if (window.innerWidth > 768) {
         setIsSidebarOpen(true);
+      } else {
+        setIsSidebarOpen(false);
       }
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  // Don't auto-close sidebar on navigation for mobile
-  // We've removed the effect that was closing the sidebar on route change
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">
@@ -43,7 +42,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="container mx-auto max-w-7xl">
+          <div className="container mx-auto max-w-7xl pb-20">
             {children}
           </div>
         </motion.main>

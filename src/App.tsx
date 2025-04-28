@@ -9,6 +9,9 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import AboutUs from "./pages/AboutUs";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 // Lazy loaded pages
 const Dashboard = lazy(() => import("./pages/Dashboard"));
@@ -26,8 +29,10 @@ const App = () => (
             <Suspense fallback={<div className="flex justify-center items-center min-h-screen">Loading...</div>}>
               <Routes>
                 <Route path="/" element={<Index />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
                 <Route path="/dashboard/*" element={<Dashboard />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
@@ -39,4 +44,3 @@ const App = () => (
 );
 
 export default App;
-

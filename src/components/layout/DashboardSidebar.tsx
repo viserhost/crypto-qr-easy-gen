@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/contexts/AuthContext';
@@ -40,8 +40,17 @@ type DashboardSidebarProps = {
 
 const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, setIsOpen }) => {
   const { user, logout } = useAuth();
-  const location = useLocation();
-  const isMobile = window.innerWidth <= 768;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  
+  // Update isMobile state on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   
   const sidebarVariants = {
     open: { width: '250px', transition: { duration: 0.3 } },
@@ -64,8 +73,8 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, setIsOpen }
     <AnimatePresence initial={false}>
       {(isOpen || !isMobile) && (
         <>
-          {/* Mobile overlay */}
-          {isMobile && (
+          {/* Mobile overlay - only show when sidebar is open on mobile */}
+          {isMobile && isOpen && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -82,7 +91,7 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, setIsOpen }
               { open: sidebarVariants.mobileOpen, closed: sidebarVariants.mobileClose } : 
               { open: sidebarVariants.open, closed: sidebarVariants.collapsed }
             }
-            initial={isMobile ? "closed" : (isOpen ? "open" : "closed")}
+            initial={isMobile ? (isOpen ? "open" : "closed") : (isOpen ? "open" : "closed")}
             animate="open"
             exit="closed"
             role="navigation"

@@ -11,24 +11,24 @@ type DashboardLayoutProps = {
 };
 
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
+  // Default to closed on small screens, open on larger screens
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const location = useLocation();
 
   useEffect(() => {
     const handleResize = () => {
-      setIsSidebarOpen(window.innerWidth > 768);
+      // Only automatically adjust sidebar on window resize, not on initial load
+      if (window.innerWidth > 768) {
+        setIsSidebarOpen(true);
+      }
     };
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Close sidebar on navigation on mobile
-  useEffect(() => {
-    if (window.innerWidth <= 768) {
-      setIsSidebarOpen(false);
-    }
-  }, [location]);
+  // Don't auto-close sidebar on navigation for mobile
+  // We've removed the effect that was closing the sidebar on route change
 
   return (
     <div className="flex h-screen overflow-hidden bg-background">

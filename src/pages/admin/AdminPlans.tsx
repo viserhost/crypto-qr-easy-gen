@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { 
   Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle 
@@ -205,7 +204,6 @@ const AdminPlans: React.FC = () => {
                   <Switch 
                     checked={plan.isActive}
                     onCheckedChange={() => handleTogglePlanStatus(plan.id)}
-                    size="sm"
                   />
                 </div>
               </CardDescription>

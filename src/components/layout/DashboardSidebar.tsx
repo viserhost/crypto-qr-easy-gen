@@ -21,13 +21,13 @@ const SidebarLink: React.FC<SidebarLinkProps> = ({ to, icon, label, isCollapsed 
       <NavLink
         to={to}
         className={({ isActive }) => `
-          flex items-center px-4 py-3 rounded-md transition-colors 
+          flex items-center px-3 py-2.5 rounded-md transition-colors 
           ${isActive ? 'bg-primary/10 text-primary font-medium' : 'hover:bg-muted'} 
           ${isCollapsed ? 'justify-center' : ''}
         `}
       >
         <span className="w-5 h-5 flex-shrink-0">{icon}</span>
-        {!isCollapsed && <span className="ml-3">{label}</span>}
+        {!isCollapsed && <span className="ml-3 truncate">{label}</span>}
       </NavLink>
     </li>
   );
@@ -53,20 +53,20 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, setIsOpen }
   }, []);
   
   const sidebarVariants = {
-    open: { width: '250px', transition: { duration: 0.3 } },
-    collapsed: { width: '70px', transition: { duration: 0.3 } },
+    open: { width: '240px', transition: { duration: 0.3 } },
+    collapsed: { width: '64px', transition: { duration: 0.3 } },
     mobileOpen: { x: 0, transition: { duration: 0.3 } },
     mobileClose: { x: '-100%', transition: { duration: 0.3 } }
   };
 
   const navLinks = [
-    { to: '/dashboard', icon: <LayoutDashboard size={20} />, label: 'Dashboard' },
-    { to: '/dashboard/ads', icon: <MonitorPlay size={20} />, label: 'View Ads' },
-    { to: '/dashboard/earnings', icon: <DollarSign size={20} />, label: 'Earnings' },
-    { to: '/dashboard/referrals', icon: <Users size={20} />, label: 'Referrals' },
-    { to: '/dashboard/plans', icon: <CreditCard size={20} />, label: 'Plans' },
-    { to: '/dashboard/withdraw', icon: <Download size={20} />, label: 'Withdraw' },
-    { to: '/dashboard/settings', icon: <Settings size={20} />, label: 'Settings' },
+    { to: '/dashboard', icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
+    { to: '/dashboard/ads', icon: <MonitorPlay size={18} />, label: 'View Ads' },
+    { to: '/dashboard/earnings', icon: <DollarSign size={18} />, label: 'Earnings' },
+    { to: '/dashboard/referrals', icon: <Users size={18} />, label: 'Referrals' },
+    { to: '/dashboard/plans', icon: <CreditCard size={18} />, label: 'Plans' },
+    { to: '/dashboard/withdraw', icon: <Download size={18} />, label: 'Withdraw' },
+    { to: '/dashboard/settings', icon: <Settings size={18} />, label: 'Settings' },
   ];
 
   return (
@@ -98,12 +98,12 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, setIsOpen }
             aria-label="Main Navigation"
           >
             {/* Logo and brand */}
-            <div className={`flex items-center ${!isOpen && !isMobile ? 'justify-center' : 'justify-between'} p-4 border-b`}>
+            <div className={`flex items-center ${!isOpen && !isMobile ? 'justify-center' : 'justify-between'} p-3 border-b`}>
               <div className="flex items-center">
-                <div className="h-8 w-8 rounded-md bg-primary flex items-center justify-center text-primary-foreground font-bold">
+                <div className="h-7 w-7 rounded-md bg-primary flex items-center justify-center text-primary-foreground font-bold">
                   CG
                 </div>
-                {(isOpen || isMobile) && <span className="ml-3 text-lg font-semibold">ClickGain</span>}
+                {(isOpen || isMobile) && <span className="ml-3 text-base font-semibold">ClickGain</span>}
               </div>
               {!isMobile && (
                 <button
@@ -111,15 +111,15 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, setIsOpen }
                   className="p-1 rounded-md hover:bg-muted"
                   aria-label={isOpen ? "Collapse sidebar" : "Expand sidebar"}
                 >
-                  {isOpen ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+                  {isOpen ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
                 </button>
               )}
             </div>
 
             {/* User info */}
-            <div className={`p-4 border-b ${!isOpen && !isMobile ? 'justify-center items-center' : ''}`}>
+            <div className={`p-3 border-b ${!isOpen && !isMobile ? 'justify-center items-center' : ''}`}>
               <div className={`flex ${!isOpen && !isMobile ? 'justify-center' : 'items-center'}`}>
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+                <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
                   {user?.avatar ? (
                     <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
                   ) : (
@@ -128,15 +128,15 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, setIsOpen }
                 </div>
                 {(isOpen || isMobile) && (
                   <div className="ml-3">
-                    <p className="font-medium">{user?.name || 'User'}</p>
-                    <p className="text-xs text-muted-foreground">{user?.email || ''}</p>
+                    <p className="font-medium truncate max-w-[160px]">{user?.name || 'User'}</p>
+                    <p className="text-xs text-muted-foreground truncate max-w-[160px]">{user?.email || ''}</p>
                   </div>
                 )}
               </div>
             </div>
 
             {/* Navigation links */}
-            <nav className="flex-1 overflow-y-auto px-2 py-4">
+            <nav className="flex-1 overflow-y-auto no-scrollbar px-2 py-3">
               <ul className="space-y-1">
                 {navLinks.map((link) => (
                   <SidebarLink
@@ -151,12 +151,12 @@ const DashboardSidebar: React.FC<DashboardSidebarProps> = ({ isOpen, setIsOpen }
             </nav>
 
             {/* Logout button */}
-            <div className="p-4 border-t">
+            <div className="p-3 border-t">
               <button
                 onClick={logout}
-                className={`flex items-center w-full px-4 py-2 rounded-md text-destructive hover:bg-destructive/10 transition-colors ${!isOpen && !isMobile ? 'justify-center' : ''}`}
+                className={`flex items-center w-full px-3 py-2 rounded-md text-destructive hover:bg-destructive/10 transition-colors ${!isOpen && !isMobile ? 'justify-center' : ''}`}
               >
-                <LogOut size={20} />
+                <LogOut size={18} />
                 {(isOpen || isMobile) && <span className="ml-3">Logout</span>}
               </button>
             </div>

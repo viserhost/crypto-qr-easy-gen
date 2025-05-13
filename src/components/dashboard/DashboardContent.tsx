@@ -22,11 +22,11 @@ const DashboardContent: React.FC = () => {
   }, []);
   
   return (
-    <>
+    <div className="space-y-4 sm:space-y-5 md:space-y-6">
       <WelcomeBanner />
       
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
         <StatCard
           title="Total Balance"
           value={126.85}
@@ -60,20 +60,28 @@ const DashboardContent: React.FC = () => {
       </div>
       
       {/* Earnings Chart */}
-      <EarningsChart />
+      <div className="bg-card border rounded-lg shadow-sm p-4">
+        <EarningsChart />
+      </div>
       
       {/* Quick Actions */}
-      <QuickActions />
+      <div className="bg-card border rounded-lg shadow-sm p-4">
+        <QuickActions />
+      </div>
       
       {/* Referrals and Activity Feed */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <TopReferrals />
-        <ActivityFeed />
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-4">
+        <div className="bg-card border rounded-lg shadow-sm p-4">
+          <TopReferrals />
+        </div>
+        <div className="bg-card border rounded-lg shadow-sm p-4">
+          <ActivityFeed />
+        </div>
       </div>
       
       {/* Footer Stats Bar */}
       <FooterStatsBar />
-    </>
+    </div>
   );
 };
 

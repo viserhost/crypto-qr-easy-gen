@@ -37,12 +37,12 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
         <DashboardHeader isSidebarOpen={isSidebarOpen} toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
         
         <motion.main 
-          className="flex-1 overflow-y-auto p-4 md:p-6"
+          className="flex-1 overflow-y-auto p-3 md:p-5 lg:p-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="container mx-auto max-w-7xl pb-20">
+          <div className="mx-auto max-w-full md:max-w-7xl pb-16">
             {children}
           </div>
         </motion.main>

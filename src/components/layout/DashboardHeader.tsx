@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -113,22 +114,22 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background'
       }`}
     >
-      <div className="h-16 px-4 flex items-center justify-between border-b">
-        <div className="flex items-center gap-2">
+      <div className="h-14 px-3 flex items-center justify-between border-b">
+        <div className="flex items-center gap-3">
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleSidebar}
-            className="mr-2"
+            className="flex-shrink-0"
             aria-label={isSidebarOpen ? "Close sidebar" : "Open sidebar"}
           >
             {isSidebarOpen ? <X size={18} /> : <Menu size={18} />}
           </Button>
           
-          <h1 className="text-xl font-semibold">{pageTitle}</h1>
+          <h1 className="text-lg font-semibold truncate">{pageTitle}</h1>
         </div>
         
-        <div className="flex items-center space-x-2">
+        <div className="flex items-center space-x-1 sm:space-x-2">
           <Button 
             variant="ghost" 
             size="icon" 
@@ -148,7 +149,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             >
               <Bell size={18} />
               {unreadCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] text-primary-foreground">
                   {unreadCount}
                 </span>
               )}
@@ -161,7 +162,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-2 w-80 rounded-md border bg-card shadow-lg overflow-hidden z-50"
+                  className="absolute right-0 mt-2 w-[280px] sm:w-[320px] rounded-md border bg-card shadow-lg overflow-hidden z-50"
                 >
                   <div className="p-3 border-b flex items-center justify-between">
                     <h3 className="font-semibold">Notifications</h3>
@@ -177,7 +178,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                     )}
                   </div>
                   
-                  <div className="max-h-[300px] overflow-y-auto">
+                  <div className="max-h-[250px] overflow-y-auto">
                     {notifications.length > 0 ? (
                       <div className="divide-y">
                         {notifications.map((notification) => (
@@ -224,15 +225,14 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               aria-expanded={showUserMenu}
               aria-haspopup="true"
             >
-              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden mr-2">
+              <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
                 {user?.avatar ? (
                   <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
                 ) : (
                   <span className="text-primary">{user?.name?.charAt(0) || 'U'}</span>
                 )}
               </div>
-              <span className="hidden md:inline-block">{user?.name || 'User'}</span>
-              <ChevronDown size={16} className="ml-2" />
+              <ChevronDown size={14} className="ml-1 hidden sm:block" />
             </Button>
             
             <AnimatePresence>
@@ -242,11 +242,11 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.2 }}
-                  className="absolute right-0 mt-2 w-56 rounded-md border bg-card shadow-lg overflow-hidden z-50"
+                  className="absolute right-0 mt-2 w-48 rounded-md border bg-card shadow-lg overflow-hidden z-50"
                 >
                   <div className="p-3 border-b">
-                    <p className="font-medium">{user?.name || 'User'}</p>
-                    <p className="text-xs text-muted-foreground">{user?.email || ''}</p>
+                    <p className="font-medium truncate">{user?.name || 'User'}</p>
+                    <p className="text-xs text-muted-foreground truncate">{user?.email || ''}</p>
                   </div>
                   
                   <div className="p-1">
